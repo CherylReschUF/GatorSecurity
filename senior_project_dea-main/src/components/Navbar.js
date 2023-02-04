@@ -57,7 +57,7 @@ const navbarStyle = {
             <LinkContainer to="/game" style={navLink}><Nav.Link style={navLink} eventKey={2} ><div style={linkContainer}><div>Game</div><img src='./gameIcon.png' alt=''/></div></Nav.Link></LinkContainer>
             <NavDropdown style={dropdown} eventKey={3} title={<img src='./profileIcon.png' alt=''/>}>
                 <LinkContainer to="/myprofile" style={dropdownItem}><NavDropdown.Item style={dropdownItem} eventKey={3.1}>My Profile</NavDropdown.Item></LinkContainer>
-                <NavDropdown.Item style={dropdownItem} eventKey={3.2}>Logout</NavDropdown.Item>
+                <LinkContainer to="/sign-in" style={dropdownItem}><NavDropdown.Item style={dropdownItem} eventKey={3.2}>Logout</NavDropdown.Item></LinkContainer>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

@@ -8,11 +8,12 @@ const server = express()
 const cors=require("cors")
 server.use(cors());
 server.use(express.json())
-require("./userSchema")
+require("./schemas")
 const jwtObj = require("jsonwebtoken");
 const Jwt_secret_Obj = "sfhgfhgefugefyfeyf63r36737288gssfgusducb@#$&fvdhfdgfuf76";
 const User = mongoose.model("UserInfo")
-const mongoUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.j81hdu6.mongodb.net/?retryWrites=true&w=majority`
+const TraditionalQuestion = mongoose.model("TraditionalQuestionInfo")
+const mongoUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pfxgixu.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect(mongoUrl, {
     useNewUrlParser:true
@@ -85,7 +86,7 @@ server.post("/userInfo", async(req,res)=>{
             res.send({status: "error", data:error});
         });
     } catch(error){
-
+		res.sendStatus(500);
     }
 })
 
@@ -99,7 +100,7 @@ server.post("/allUsers", async(req,res)=>{
             res.send({status: "error", data:error});
         });
     } catch(error){
-
+		res.sendStatus(500);
     }
 })
 
@@ -116,12 +117,28 @@ server.put("/updatescore", async(req,res)=>{
         console.log("result: ");
         console.log(result);
         
+		res.sendStatus(200);
     } catch(error){
-
+		res.sendStatus(500);
     }
 
 })
 
+server.post("/questions/create", async(req,res)=>{
+    try{
+        const question = new TraditionalQuestion({
+            qbody: req.body.question,
+            qtype: req.body.type,
+            qtopic: req.body.topic,
+            answers: req.body.options,
+            correctans: req.body.answer,
+        })
+        await question.save();
+        res.sendStatus(201);
+    } catch(error){
+        res.sendStatus(418);
+    }
+})
 
 server.listen(5000, ()=>{
     console.log("Server started on port 5000");

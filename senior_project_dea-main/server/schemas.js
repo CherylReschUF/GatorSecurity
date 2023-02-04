@@ -14,4 +14,18 @@ const userDBSchema = new mongoose.Schema(
     }
 );
 
+const traditionalQuestionDBSchema = new mongoose.Schema(
+    {
+		question:String,
+		type:Number,
+		topic:Number,
+		options:Array,
+		answer:String,
+    },
+    {
+        collection: "TraditionalQuestionInfo",
+    }
+);
+
 mongoose.model("UserInfo", userDBSchema);
+mongoose.model("TraditionalQuestionInfo", traditionalQuestionDBSchema);
