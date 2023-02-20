@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LoginBanner from './LoginBanner';
-import './LoginAndSignUp.css';
-import gator from '../images/gator.png';
+import './css/LoginAndSignUp.css';
+import gator from '../../images/gator.png';
 
 export default class Login extends Component {
     constructor(props){
@@ -16,8 +16,7 @@ export default class Login extends Component {
         e.preventDefault();
         const{email, password} = this.state;
         console.log(email, password);
-
-        fetch("http://localhost:5000/login", {
+        fetch("http://localhost:5000/users/login", {
       method: "POST",
       crossDomain:true,
       headers:{
@@ -32,10 +31,14 @@ export default class Login extends Component {
     }).then((res)=>res.json())
     .then((data)=>{
       console.log(data,"userRegister");
-      if(data.status=="ok"){
-        alert("Login was successful");
+      if(data.status === "ok"){
+        alert("Login was successful!");
+        window.localStorage.removeItem("token");
         window.localStorage.setItem("token", data.data);
         window.location.href="./welcome"
+      }
+      else {
+        alert("Login was unsuccessful. Please try again.");
       }
     });
     }
@@ -45,7 +48,9 @@ export default class Login extends Component {
       <div>
         <LoginBanner/>
         <div className='bannerSpacer'></div>
-        <img className="gator-image" src={gator}  />
+        
+        <img className="gator-image" src={gator} alt="Gator"/>
+
         <form onSubmit={this.handleSubmit}>
           <h3 className='title-name'>Sign In</h3>
 
@@ -68,9 +73,7 @@ export default class Login extends Component {
               onChange={e=>this.setState({password:e.target.value})}
             />
           </div>
-
           
-
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
               Login

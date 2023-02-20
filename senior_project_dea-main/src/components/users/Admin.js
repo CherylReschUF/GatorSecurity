@@ -9,7 +9,7 @@ export default class Admin extends React.Component {
       };
     }
     componentDidMount(){
-      fetch("http://localhost:5000/allUsers", 
+      fetch("http://localhost:5000/users/allUsers", 
         {
           method: "POST",
           crossDomain:true,
@@ -42,7 +42,7 @@ export default class Admin extends React.Component {
         for(var i=0; i<user["learnscore"].length; i++){
             var message = "Incomplete"
             var textColor = "red"
-            if(user["learnscore"][i] == 1){
+            if(user["learnscore"][i] === 1){
                 message = "Complete   "
                 textColor = "limegreen"
             }
@@ -59,7 +59,7 @@ export default class Admin extends React.Component {
         for(var i=0; i<user["gamescore"].length; i++){
             var message = "Incomplete"
             var textColor = "red"
-            if(user["gamescore"][i] == 1){
+            if(user["gamescore"][i] === 1){
                 message = "Complete   "
                 textColor = "limegreen"
             }
@@ -67,6 +67,10 @@ export default class Admin extends React.Component {
             gameView.push(element)
         }
         return <th style={{whiteSpace:"pre-wrap", wordWrap:"break-word"}}>{totalScore}{gameView}</th>
+      }
+
+      if(this.state.allUsers.status === 403) {
+        return (<>You are not authorized to access this page.</>)
       }
 
       return (

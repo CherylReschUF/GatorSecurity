@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './LoginAndSignUp.css';
+import './css/LoginAndSignUp.css';
 import LoginBanner from './LoginBanner';
-import gator from '../images/gator.png';
+import gator from '../../images/gator.png';
 
 export default class SignUp extends Component {
   constructor(props){
@@ -18,7 +18,7 @@ export default class SignUp extends Component {
     e.preventDefault();
     const{fname, lname, email, password} = this.state;
     console.log(fname, lname, email, password);
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:5000/users/register", {
       method: "POST",
       crossDomain:true,
       headers:{
@@ -35,9 +35,12 @@ export default class SignUp extends Component {
     }).then((res)=>res.json())
     .then((data)=>{
       console.log(data,"userRegister");
-      if(data.status=="ok"){
+      if(data.status==="ok"){
         alert("Registration was successful");
         window.location.href="./sign-in"
+      }
+      else {
+        alert("A GatorSecurity account already exists with this email address.");
       }
     })
   }
@@ -46,7 +49,7 @@ export default class SignUp extends Component {
       <div>
         <LoginBanner/>
         <br/>
-        <img className="gator-image" src={gator}  />
+        <img className="gator-image" src={gator} alt="Gator"/>
         <form onSubmit={this.handleSubmit}>
           <h3 className='title-name'>Sign Up</h3>
 

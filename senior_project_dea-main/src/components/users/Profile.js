@@ -1,6 +1,7 @@
 import React from 'react';
-import './personalProfile.css';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon, MDBProgress, MDBProgressBar, MDBBtn } from 'mdb-react-ui-kit';
+import './css/personalProfile.css';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBProgress, MDBProgressBar, MDBBtn } from 'mdb-react-ui-kit';
+import { LinkContainer } from "react-router-bootstrap"
 
 export default class ProfilePage extends React.Component {
     constructor(props){
@@ -9,8 +10,10 @@ export default class ProfilePage extends React.Component {
         userInfo: null
       };
     }
+    
     componentDidMount(){
-      fetch("http://localhost:5000/userInfo", 
+      //See server.js for server.post(/userInfo)
+      fetch("http://localhost:5000/users/userInfo", 
         {
           method: "POST",
           crossDomain:true,
@@ -24,17 +27,47 @@ export default class ProfilePage extends React.Component {
         }),
         }).then((res)=>res.json())
         .then(data=>{
-          this.setState({userInfo: data.data});
+          this.setState({userInfo: data.data.dbUserData});
+        });
+        fetch("http://localhost:5000/questions/getCount", 
+        {
+          method: "POST",
+          crossDomain:true,
+          headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json",
+            "Access-Control-Allow-Origin":"*",
+        },
+        body:JSON.stringify({displayType:'learn'}),
+        }).then((res)=>res.json())
+        .then(data=>{
+          this.setState({learnQuestionCount: data.data})
+        });
+        fetch("http://localhost:5000/questions/getCount", 
+        {
+          method: "POST",
+          crossDomain:true,
+          headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json",
+            "Access-Control-Allow-Origin":"*",
+        },
+        body:JSON.stringify({displayType:'game'}),
+        }).then((res)=>res.json())
+        .then(data=>{
+          this.setState({gameQuestionCount: data.data})
         });
     }
+
+    //Everything after this has to do with web page rendering
     render(){
+      //CSS For Profile Page
       const container = {
         display: "block",        
         marginLeft: "auto",
         marginRight: "auto",        
         fontFamily:"Gluten",
         paddingTop: "50px"
-    
       };
       const heading = {
         fontFamily: "Gluten",
@@ -42,20 +75,24 @@ export default class ProfilePage extends React.Component {
         fontSize: "40px",
         paddingBottom: "10px",
         textDecorationLine: "underline"
-    
       };
       
+      //If userInfo doesn't exist, return a blank page
       if(this.state.userInfo == null){
         return <div></div>
       }
+
+      //Set values for return section
       var fullName = this.state.userInfo["fname"] + " " + this.state.userInfo["lname"];
       var email = this.state.userInfo["email"];
-      var gameScore = this.state.userInfo["gamescore"].reduce((a, b) => a + b, 0);
-      var gameMax = this.state.userInfo["gamescore"].length;
+      var gameScore = this.state.userInfo["gamescore"].length;
+      var gameMax = this.state.gameQuestionCount;
       var gamePercentage = Math.floor(gameScore/gameMax * 100);
-      var learnScore = this.state.userInfo["learnscore"].reduce((a, b) => a + b, 0);
-      var learnMax = this.state.userInfo["learnscore"].length;
+      var learnScore = this.state.userInfo["learnscore"].length;
+      var learnMax = this.state.learnQuestionCount;
       var learnPercentage = Math.floor(learnScore/learnMax * 100);
+
+      //What is rendered to the webpage
       return (
         <section style={container}>
           <h4 style={heading}>My Profile</h4>
@@ -69,10 +106,13 @@ export default class ProfilePage extends React.Component {
                       <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                         alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
                       <MDBTypography tag="h5">{fullName}</MDBTypography>
-                      <MDBCardText>CS Undergraduate</MDBCardText>  
-                      <MDBBtn outline color="light" style={{height: '36px', overflow: 'visible'}}>
-                        Edit profile
-                      </MDBBtn>             
+                      <MDBCardText>CS Undergraduate</MDBCardText>
+                      {/*LinkContainer adds routing to the Edit Profile button. Sends the user to /userInfo*/}
+                      <LinkContainer to="/userInfo">
+                        <MDBBtn outline color="light" style={{height: '36px', overflow: 'visible'}}>
+                          Edit profile
+                        </MDBBtn>
+                      </LinkContainer> 
                     </MDBCol>
                     <MDBCol md="8">
                       <MDBCardBody className="p-4">
@@ -115,6 +155,5 @@ export default class ProfilePage extends React.Component {
           </MDBContainer>
       </section>
     );
-    }
-    
+  }
 }

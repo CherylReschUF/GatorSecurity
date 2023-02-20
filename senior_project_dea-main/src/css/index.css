@@ -7,5 +7,5 @@ html {
 
 @font-face {
   font-family: "Gluten";
-  src: local("Gluten"), url(./fonts/Gluten-Regular.ttf) format("truetype");
+  src: local("Gluten"), url(../fonts/Gluten-Regular.ttf) format("truetype");
 }

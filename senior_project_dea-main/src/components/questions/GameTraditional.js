@@ -3,8 +3,9 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
+// TODO: Deprecate
 function updateScore(token_, section_, index_){
-    fetch("http://localhost:5000/updatescore", {
+    fetch("http://localhost:5000/users/updatescore", {
             method: "PUT",
             crossDomain:true,
             headers:{
@@ -123,10 +124,10 @@ const box = {
     padding: "30px 40px"
 }
 
-function GamePage() {
-  
-
+function GameTraditionalPage() {
   return (
+    
+    
     <div id="gamepagediv">
         <h1 id="gametitle">Game</h1>
 
@@ -213,7 +214,8 @@ function GamePage() {
         </Row>
         </Tab.Container>
     </div>
+    
   );
 }
 
-export default GamePage;
+export default GameTraditionalPage;
