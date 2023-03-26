@@ -5,95 +5,107 @@ import Tab from 'react-bootstrap/Tab';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-function updateScore(token_, section_, index_){
+function updateScore(token_, section_, index_) {
   fetch("http://localhost:5000/updatescore", {
-          method: "PUT",
-          crossDomain:true,
-          headers:{
-              "Content-Type":"application/json",
-              Accept:"application/json",
-              "Access-Control-Allow-Origin":"*",
-          },
-          body:JSON.stringify({
-              token:token_,
-              section:section_,
-              index:index_,
-          }),
-          }).then((res)=>res.json())
-          .then((data)=>{
-              console.log(data,"updatescore");
-      })
+    method: "PUT",
+    crossDomain: true,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      token: token_,
+      section: section_,
+      index: index_,
+    }),
+  }).then((res) => res.json())
+    .then((data) => {
+      console.log(data, "updatescore");
+    })
 }
 
-function checkAnswer1(){
-  
+function checkAnswer1() {
+
   var selectionQ1 = document.getElementById("q1option1");
-  if (selectionQ1.checked == true){
+  if (selectionQ1.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "0");
   }
-  else{
+  else {
     alert("Incorrect. Try again!");
   }
 }
 
 
-function checkAnswer2(){
-  
+function checkAnswer2() {
+
   var selectionQ2 = document.getElementById("q2option3");
-  if (selectionQ2.checked == true){
+  if (selectionQ2.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "1");
   }
-  else{
+  else {
     alert("Incorrect. Try again!");
   }
 }
 
-function checkAnswer3(){
-  
+function checkAnswer3() {
+
   var selectionQ3 = document.getElementById("q3option2");
-  if (selectionQ3.checked == true){
+  if (selectionQ3.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "2");
   }
-  else{
+  else {
     alert("Incorrect. Try again!");
   }
 }
 
-function checkAnswer4(){
-  
+function checkAnswer4() {
+
   var selectionQ4 = document.getElementById("q4option1");
-  if (selectionQ4.checked == true){
+  if (selectionQ4.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "3");
   }
-  else{
+  else {
     alert("Incorrect. Try again!");
   }
 }
 
-function checkAnswer5(){
-  
+function checkAnswer5() {
+
   var selectionQ5 = document.getElementById("q5option3");
-  if (selectionQ5.checked == true){
+  if (selectionQ5.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "4");
   }
-  else{
+  else {
     alert("Incorrect. Try again!");
   }
 }
 
-function checkAnswer6(){
-  
+function checkAnswer6() {
+
   var selectionQ6 = document.getElementById("q6option2");
-  if (selectionQ6.checked == true){
+  if (selectionQ6.checked == true) {
     alert("Correct!");
     updateScore(window.localStorage.getItem("token"), "learn", "5");
   }
-  else{
+  else {
+    alert("Incorrect. Try again!");
+  }
+}
+
+function checkAnswer7() {
+
+  var selectionQ7 = document.getElementById("q7option4");
+  if (selectionQ7.checked == true) {
+    alert("Correct!");
+    updateScore(window.localStorage.getItem("token"), "learn", "6");
+  }
+  else {
     alert("Incorrect. Try again!");
   }
 }
@@ -175,16 +187,21 @@ function LearnPage() {
     setSelection6(e.target.value)
   }
 
+  const [answer7, setSelection7] = React.useState('');
+  const onChange7 = e => {
+    setSelection7(e.target.value)
+  }
+
   return (
     <div id="learndiv" style={container}>
       <h4 style={heading}>Learn</h4>
       <Tabs fill justify defaultActiveKey="first" style={tabs}>
-      <Tab eventKey="first" title="Input Validation" style={tab}>
+        <Tab eventKey="first" title="Input Validation" style={tab}>
           Input validation is used to check the data that is being entered to ensure it is of the proper form. It should be applied to both syntactical and semantic levels and occur as soon as data is being entered from the user.
           <div style={{ paddingTop: "15px", width: "70%", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}><ul style={list}>
             <li><strong>Syntactic:</strong> Arrangement of data in fields. i.e. Data is of the form MM-DD-YYYY. </li><div style={{ paddingBottom: "10px" }}></div>
             <li><strong>Semantic:</strong> Correctness of values. i.e. Start date is before end date. </li><div style={{ paddingBottom: "10px" }}></div>
-           <div style={{ paddingBottom: "10px" }}></div>
+            <div style={{ paddingBottom: "10px" }}></div>
           </ul>
             <div style={spaceAfterQ}></div>
           </div> Q: Input validation should happen as early as possible. True or False?<div style={spaceAfterQ}></div>
@@ -199,8 +216,8 @@ function LearnPage() {
                       name="answer1"
                       type={type}
                       value="True"
-                      checked={answer1==="True"}
-                      onChange={onChange1}                      
+                      checked={answer1 === "True"}
+                      onChange={onChange1}
 
                     />
                     <Form.Check id="q1option2"
@@ -209,11 +226,11 @@ function LearnPage() {
                       name="answer1"
                       type={type}
                       value="False"
-                      checked={answer1==="False"}
-                      onChange={onChange1}                     
+                      checked={answer1 === "False"}
+                      onChange={onChange1}
 
                     />
-                  </Form.Group>                  
+                  </Form.Group>
                 </div>
               ))}
             </Form>
@@ -247,8 +264,8 @@ function LearnPage() {
                       name="answer2"
                       type={type}
                       value="."
-                      checked={answer2==="."}
-                      onChange={onChange2}                      
+                      checked={answer2 === "."}
+                      onChange={onChange2}
 
                     />
                     <Form.Check id="q2option2"
@@ -257,21 +274,21 @@ function LearnPage() {
                       name="answer2"
                       type={type}
                       value="?"
-                      checked={answer2==="?"}
-                      onChange={onChange2}                     
+                      checked={answer2 === "?"}
+                      onChange={onChange2}
 
                     />
-                     <Form.Check id="q2option3"
+                    <Form.Check id="q2option3"
                       inline
                       label="\"
                       name="answer2"
                       type={type}
                       value="\"
-                      checked={answer2==="\\"}
-                      onChange={onChange2}                     
+                      checked={answer2 === "\\"}
+                      onChange={onChange2}
 
                     />
-                  </Form.Group>                  
+                  </Form.Group>
                 </div>
               ))}
             </Form>
@@ -295,7 +312,7 @@ function LearnPage() {
             <li><strong>Stored:</strong> Web application stores the malicious code in a server or database and passes it on to other users.</li><div style={{ paddingBottom: "10px" }}></div>
             <li><strong>Document Object Model (DOM)-based:</strong> Triggered by JavaScript events and runs immediately. The attack is embedded into the existing webpage. </li><div style={{ paddingBottom: "10px" }}></div>
           </ul>
-             One case of XSS is an insertion using the script tag. For example, a possible script could be <strong>&lt;script&gt;alert('Display message here')&lt;/script&gt;</strong>, and the page would execute the script.
+            One case of XSS is an insertion using the script tag. For example, a possible script could be <strong>&lt;script&gt;alert('Display message here')&lt;/script&gt;</strong>, and the page would execute the script.
             <div style={spaceAfterQ}></div>
             <div style={spaceAfterQ}></div>
             <div style={spaceAfterQ}></div>
@@ -312,8 +329,8 @@ function LearnPage() {
                       name="answer3"
                       type={type}
                       value="True"
-                      checked={answer3==="True"}
-                      onChange={onChange3}                      
+                      checked={answer3 === "True"}
+                      onChange={onChange3}
 
                     />
                     <Form.Check id="q3option2"
@@ -322,11 +339,11 @@ function LearnPage() {
                       name="answer3"
                       type={type}
                       value="False"
-                      checked={answer3==="False"}
-                      onChange={onChange3}                     
+                      checked={answer3 === "False"}
+                      onChange={onChange3}
 
                     />
-                  </Form.Group>                  
+                  </Form.Group>
                 </div>
               ))}
             </Form>
@@ -363,7 +380,7 @@ function LearnPage() {
                       name="answer4"
                       type={type}
                       value="Least privilege principle"
-                      checked={answer4==="Least privilege principle"}
+                      checked={answer4 === "Least privilege principle"}
                       onChange={onChange4}
 
                     />
@@ -373,9 +390,9 @@ function LearnPage() {
                       name="answer4"
                       type={type}
                       value="Most privilege principle"
-                      checked={answer4==="Most privilege principle"}
+                      checked={answer4 === "Most privilege principle"}
                       onChange={onChange4}
-                      
+
 
                     />
                     <Form.Check id="q4option3"
@@ -384,7 +401,7 @@ function LearnPage() {
                       name="answer4"
                       type={type}
                       value="Cleaning"
-                      checked={answer4==="Cleaning"}
+                      checked={answer4 === "Cleaning"}
                       onChange={onChange2}
 
                     />
@@ -394,7 +411,7 @@ function LearnPage() {
                       name="answer4"
                       type={type}
                       value="Sweeping"
-                      checked={answer4==="Sweeping"}
+                      checked={answer4 === "Sweeping"}
                       onChange={onChange4}
 
                     />
@@ -415,14 +432,14 @@ function LearnPage() {
           Sourced from PortSwigger, CodePath, OWASP, and W3Schools.
         </Tab>
         <Tab eventKey="fifth" title="Cryptography" style={tab}>
-         Cryptography involves studying encryption techniques, or keeping information private through encoding. Typically, these techniques involve turning text into cipher text that only the receiver can encode and reveal.  
-         <div style={{ paddingTop: "15px", width: "70%", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}><ul style={list}>
+          Cryptography involves studying encryption techniques, or keeping information private through encoding. Typically, these techniques involve turning text into cipher text that only the receiver can encode and reveal.
+          <div style={{ paddingTop: "15px", width: "70%", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}><ul style={list}>
             <li><strong>Symmetric Key:</strong> Sender and receiver use one common key. </li><div style={{ paddingBottom: "10px" }}></div>
             <li><strong>Hash Functions:</strong> No key. </li><div style={{ paddingBottom: "10px" }}></div>
             <li><strong>Asymmetric Key:</strong> A pair of keys is used and includes a private and public one. Only the receiver knows the private key.  </li><div style={{ paddingBottom: "10px" }}></div>
           </ul>
           </div>
-         
+
           <div style={spaceAfterQ}></div>
           <div style={spaceAfterQ}></div>
           Q: Which of the following types of cryptography do not use a key?<div style={spaceAfterQ}></div>
@@ -431,44 +448,44 @@ function LearnPage() {
               {['radio'].map((type) => (
                 <div className="mb-4">
                   <Form.Group>
-                    <Form.Check  id="q5option1"
+                    <Form.Check id="q5option1"
                       inline
                       label="Symmetric key"
                       name="answer5"
                       type={type}
                       value="Symmetric key"
-                      checked={answer5==="Symmetric key"}
+                      checked={answer5 === "Symmetric key"}
                       onChange={onChange5}
 
                     />
-                    <Form.Check  id="q5option2"
+                    <Form.Check id="q5option2"
                       inline
                       label="Asymmetric key"
                       name="answer5"
                       type={type}
                       value="Asymmetric key"
-                      checked={answer5==="Asymmetric key"}
+                      checked={answer5 === "Asymmetric key"}
                       onChange={onChange5}
 
                     />
-                    <Form.Check  id="q5option3"
+                    <Form.Check id="q5option3"
                       inline
                       label="Hash functions"
                       name="answer5"
                       type={type}
                       value="Hash functions"
-                      checked={answer5==="Hash functions"}
+                      checked={answer5 === "Hash functions"}
                       onChange={onChange5}
-                      
+
 
                     />
-                    <Form.Check  id="q5option4"
+                    <Form.Check id="q5option4"
                       inline
                       label="0-hash"
                       name="answer5"
                       type={type}
                       value="0-hash"
-                      checked={answer5==="0-hash"}
+                      checked={answer5 === "0-hash"}
                       onChange={onChange5}
 
                     />
@@ -513,8 +530,8 @@ function LearnPage() {
                       name="answer6"
                       type={type}
                       value="True"
-                      checked={answer6==="True"}
-                      onChange={onChange6}      
+                      checked={answer6 === "True"}
+                      onChange={onChange6}
 
                     />
                     <Form.Check id="q6option2"
@@ -523,8 +540,8 @@ function LearnPage() {
                       name="answer6"
                       type={type}
                       value="False"
-                      checked={answer6==="False"}
-                      onChange={onChange6}      
+                      checked={answer6 === "False"}
+                      onChange={onChange6}
 
                     />
                   </Form.Group>
@@ -542,6 +559,142 @@ function LearnPage() {
             <div style={spaceAfterQ}></div>
           </div>
           Sourced from CodePath and TechTarget.
+        </Tab>
+        <Tab eventKey="eigth" title = "Phishing" style={tab}>
+        Web exploitation is the process of exploiting vulnerabilities in web-based applications to gain access to sensitive data or control over the app. Attackers can exploit these vulnerabilities to take over the entire app, steal sensitive data, or use the app to launch attacks on other systems.
+        <div style={{ paddingTop: "15px", width: "70%", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+          </div> Q: What are the most popular signs of a phishing scam?<div style={spaceAfterQ}></div>
+          <div>
+            <Form>
+              {['radio'].map((type) => (
+                <div className="mb-4">
+                  <Form.Group>
+                    <Form.Check id="q7option1"
+                      inline
+                      label="A. The email comes with a disclaimer/alert notifying the user that it is spam."
+                      name="answer7"
+                      type={type}
+                      value="A. The email comes with a disclaimer/alert notifying the user that it is spam."
+                      checked={answer7 === "A. The email comes with a disclaimer/alert notifying the user that it is spam."}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option2"
+                      inline
+                      label="B. The email is empty and contains nothing in the subject or body."
+                      name="answer7"
+                      type={type}
+                      value="B. The email is empty and contains nothing in the subject or body."
+                      checked={answer7 === "B. The email is empty and contains nothing in the subject or body."}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option3"
+                      inline
+                      label="C. An authentic sender sending regular subscribed updates."
+                      name="answer7"
+                      type={type}
+                      value="C. An authentic sender sending regular subscribed updates."
+                      checked={answer7 === "C. An authentic sender sending regular subscribed updates."}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option4"
+                      inline
+                      label="D. Inconsistency in the sender’s email ID and how the recipient is addressed."
+                      name="answer7"
+                      type={type}
+                      value="D. Inconsistency in the sender’s email ID and how the recipient is addressed."
+                      checked={answer7 === "D. Inconsistency in the sender’s email ID and how the recipient is addressed."}
+                      onChange={onChange7}
+
+                    />
+                  </Form.Group>
+                </div>
+              ))}
+            </Form>
+            <Button type="submit" onClick={checkAnswer7}>Submit</Button>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            You selected: <strong>{answer7}</strong>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+          </div>
+
+          Sourced from InspiredeLearning.
+        </Tab>
+        <Tab eventKey="seventh" title="Web Exploitation" style={tab}>
+          Phishing is a technique used to obtain sensitive information such as names, addresses, bank account numbers, and other personal details. Scammers will create links that redirect users to a fake website that appears to be legitimate. Scammers attempt to instill a sense of urgency in their victims so that they make poor decisions and give away personal information.
+          <div style={{ paddingTop: "15px", width: "70%", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+          </div> Q: What is the most common way of web exploitation?<div style={spaceAfterQ}></div>
+          <div>
+            <Form>
+              {['radio'].map((type) => (
+                <div className="mb-4">
+                  <Form.Group>
+                    <Form.Check id="q7option1"
+                      inline
+                      label="A. SQL Injection"
+                      name="answer7"
+                      type={type}
+                      value="A. SQL Injection"
+                      checked={answer7 === "A. SQL Injection"}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option2"
+                      inline
+                      label="B. Directory Traversal"
+                      name="answer7"
+                      type={type}
+                      value="B. Directory Traversal"
+                      checked={answer7 === "B. Directory Traversal"}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option3"
+                      inline
+                      label="C. Cross Site Request Forgery"
+                      name="answer7"
+                      type={type}
+                      value="C. Cross Site Request Forgery"
+                      checked={answer7 === "C. Cross Site Request Forgery"}
+                      onChange={onChange7}
+
+                    />
+                    <Form.Check id="q7option4"
+                      inline
+                      label="D. Command Execution"
+                      name="answer7"
+                      type={type}
+                      value="D. Command Execution"
+                      checked={answer7 === "D. Command Execution"}
+                      onChange={onChange7}
+
+                    />
+                  </Form.Group>
+                </div>
+              ))}
+            </Form>
+            <Button type="submit" onClick={checkAnswer7}>Submit</Button>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            You selected: <strong>{answer7}</strong>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+            <div style={spaceAfterQ}></div>
+          </div>
+
+          Sourced from CTF101 and Mosse Cyber Security Institute.
         </Tab>
       </Tabs>
     </div>
