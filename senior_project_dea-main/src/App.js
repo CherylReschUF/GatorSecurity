@@ -4,7 +4,7 @@ import MyWelcomePage from './components/Welcome';
 import LearnPage from './components/Learn';
 import GamePage from './components/Game';
 import ProfilePage from './components/Profile';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter as  Router, Routes, Route } from "react-router-dom"
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserInfo from './components/UserInfo'

@@ -1,94 +1,94 @@
-.title-name{
-    font-family: 'Gluten';
+.title-name {
+    font-family: 'Arvo',sans-serif;
 }
 
-.mb-3{
+.mb-3 {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Gluten';
+    font-family: 'Arvo',sans-serif;
 }
 
-.d-grid{
-    font-family: 'Gluten';
+.d-grid {
+    font-family: 'Arvo',sans-serif;
     width: 12.5%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.gator-image{
+.gator-image {
     width: auto;
     height: 22.5vh;
-    
+
 }
 
-.forgot-password{
-    font-family: 'Gluten';
+.forgot-password {
+    font-family: 'Arvo',sans-serif;
 }
 
-.user-info{
-    font-family: 'Gluten';
+.user-info {
+    font-family: 'Arvo',sans-serif;
 }
 
 /*Code below is for the game page*/
 
-#gamepagediv{
+#gamepagediv {
     display: block;
     width: 65%;
     margin-left: auto;
     margin-right: auto;
     padding-Top: 50px;
-    font-family: "Gluten";
+    font-family: 'Arvo',sans-serif;
 }
 
-.bannerSpacer{
+.bannerSpacer {
     padding-bottom: 20px;
 }
 
-#gametitle{
+#gametitle {
     padding-bottom: 50px;
     color: #2613fe;
     text-decoration: underline;
-    font-size: 40px;    
+    font-size: 40px;
 }
 
-#tableDiv{
+#tableDiv {
     padding-left: 32vw;
     padding-top: 25px;
 }
 
-#search{
+#search {
     border-radius: 5px;
     background-color: #e8effa;
 }
 
-#search-2{
+#search-2 {
     border-radius: 5px;
     background-color: #e8effa;
 }
 
-#email{
+#email {
     border-radius: 5px;
     background-color: #e8effa;
 }
 
-#password{
+#password {
     border-radius: 5px;
     margin-left: 2px;
     background-color: #e8effa;
 }
 
-#search-4{
+#search-4 {
     border-radius: 5px;
     background-color: #e8effa;
 }
 
-#key{
+#key {
     border-radius: 5px;
     background-color: #e8effa;
 }
 
-.button{
+.button {
     border-radius: 5px;
     border: none;
     height: 30px;
@@ -96,4 +96,11 @@
     margin-left: 3px;
     background-color: #2078fc;
     color: white;
+}
+
+.eFax-image {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+
 }

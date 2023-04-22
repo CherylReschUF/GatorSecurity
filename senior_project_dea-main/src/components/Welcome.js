@@ -19,7 +19,6 @@ export default class WelcomePage extends React.Component {
         headers:{
           "Content-Type":"application/json",
           Accept:"application/json",
-          "Access-Control-Allow-Origin":"*",
       },
       body:JSON.stringify({
         token:window.localStorage.getItem("token"),

@@ -15,22 +15,37 @@ export default class UserInfo extends Component{
         headers:{
             "Content-Type":"application/json",
             Accept:"application/json",
-            "Access-Control-Allow-Origin":"*",
         },
         body:JSON.stringify({
             token:window.localStorage.getItem("token"),
         }),
         }).then((res)=>res.json())
         .then((data)=>{
+            console.log("We are in data and this is admin value: " + data.data.admin)
             console.log(data,"userInfo");
             this.setState({userInfo: data.data});
+
         })
     }
+
+    
+
     render(){
-    return(
+        return(
             <div className="user-info">
-                Name<h1>{this.state.userInfo.fname}</h1>
-                Email<h1>{this.state.userInfo.email}</h1>
+                {this.state.userInfo && (
+                    <React.Fragment>
+                        <div>
+                            Name<h1>{this.state.userInfo.fname + " " + this.state.userInfo.lname}</h1>
+                        </div>
+                        <div>
+                            Email<h1>{this.state.userInfo.email}</h1>
+                        </div>
+                        <div>
+                            Admin<h1>{this.state.userInfo.admin.toString()}</h1>
+                        </div>
+                    </React.Fragment>
+                )}
             </div>
         );
     }

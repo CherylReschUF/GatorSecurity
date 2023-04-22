@@ -16,7 +16,6 @@ export default class Admin extends React.Component {
           headers:{
             "Content-Type":"application/json",
             Accept:"application/json",
-            "Access-Control-Allow-Origin":"*",
         },
         body:JSON.stringify({
           token:window.localStorage.getItem("token"),
@@ -35,30 +34,30 @@ export default class Admin extends React.Component {
         return <div></div>
       }
       function createLearnView(user){
-        var learnScore = user["learnscore"].reduce((a, b) => a + b, 0);
-        var learnMax = user["learnscore"].length;
-        var totalScore = ["Total Score: "+learnScore+"/"+learnMax+"\n","\n"]
-        var learnView = []
-        for(var i=0; i<user["learnscore"].length; i++){
-            var message = "Incomplete"
-            var textColor = "red"
+        let learnScore = user["learnscore"].reduce((a, b) => a + b, 0);
+        let learnMax = user["learnscore"].length;
+        let totalScore = ["Total Score: "+learnScore+"/"+learnMax+"\n","\n"]
+        let learnView = []
+        for(let i=0; i<user["learnscore"].length; i++){
+            let message = "Incomplete"
+            let textColor = "red"
             if(user["learnscore"][i] == 1){
                 message = "Complete   "
                 textColor = "limegreen"
             }
-            var element = <div style={{color: textColor}}>{(i+1)+": "+message+"\n"}</div>
+            let element = <div style={{color: textColor}}>{(i+1)+": "+message+"\n"}</div>
             learnView.push(element)
         }
         return <th style={{whiteSpace:"pre-wrap", wordWrap:"break-word"}}>{totalScore}{learnView}</th>
       }
       function createGameView(user){
-        var gameScore = user["gamescore"].reduce((a, b) => a + b, 0);
-        var gameMax = user["gamescore"].length;
-        var totalScore = ["Total Score: "+gameScore+"/"+gameMax+"\n","\n"]
-        var gameView = []
-        for(var i=0; i<user["gamescore"].length; i++){
-            var message = "Incomplete"
-            var textColor = "red"
+        let gameScore = user["gamescore"].reduce((a, b) => a + b, 0);
+        let gameMax = user["gamescore"].length;
+        let totalScore = ["Total Score: "+gameScore+"/"+gameMax+"\n","\n"]
+        let gameView = []
+        for(let i=0; i<user["gamescore"].length; i++){
+            let message = "Incomplete"
+            let textColor = "red"
             if(user["gamescore"][i] == 1){
                 message = "Complete   "
                 textColor = "limegreen"

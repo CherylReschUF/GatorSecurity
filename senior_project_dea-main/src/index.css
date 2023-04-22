@@ -1,11 +1,11 @@
 body,
 html {
   
-  font-family: "Gluten";
+  font-family: 'Arvo',sans-serif;
 
 }
 
 @font-face {
-  font-family: "Gluten";
-  src: local("Gluten"), url(./fonts/Gluten-Regular.ttf) format("truetype");
+  font-family: 'Arvo',sans-serif;
+  src: local("Arvo"), url(./fonts/Arvo-Regular.ttf) format("truetype");
 }
