@@ -1,0 +1,34 @@
+.matchCard {
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    border-color: transparent;
+
+}
+
+.matchCard .front {
+    transform: rotateY(90deg);
+    transition: all ease-in 0.2s;
+    position: absolute;
+    top: 0;
+    background-color: #EEEEEE;
+    border-radius: 1em;
+
+}
+
+.flipped .front {
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+}
+
+.matchCard .back {
+    transition: all ease-in 0.2s;
+    transition-delay: 0.2s;
+    background-image: linear-gradient(#0A2647, #2C74B3);
+    border-radius: 1em;
+}
+
+.flipped .back {
+    transform: rotateY(90deg);
+    transition-delay: 0s;
+}

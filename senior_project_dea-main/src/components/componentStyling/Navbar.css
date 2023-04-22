@@ -1,0 +1,24 @@
+.dropdown-menu {
+    background-color: #2C74B3 !important;
+}
+
+.nav-tab.nav-link.active{
+    background-color: #E38B29;
+}
+
+.nav-link.active{
+    background-color: #2C74B3 !important;
+    color: white !important;
+}
+
+.nav-link {
+    color: #2C74B3 !important;
+}
+
+.navbar-nav {
+    color: white;
+}
+
+.dropdown-toggle {
+    color: white !important;
+}

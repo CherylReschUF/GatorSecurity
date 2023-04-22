@@ -2,62 +2,124 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { LinkContainer } from "react-router-bootstrap"
+import { LinkContainer } from "react-router-bootstrap";
+import { useEffect, useState } from 'react';
+import './componentStyling/Navbar.css';
 
-
+import GetConfig from '../Config.js';
 
 function MyNavbar() {
+  const [isAdmin, setIsAdmin] = useState({isAdmin: false});
+
+  useEffect(() => {
+    //Function that checks if user is an admin via backend request
+    async function adminStatus() {
+      const response = fetch(GetConfig().SERVER_ADDRESS + "/users/checkPrivileges", {
+          method: "POST",
+          crossDomain:true,
+          headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json",
+            "Access-Control-Allow-Origin": GetConfig().SERVER_ADDRESS,
+        },
+        body:JSON.stringify({token: window.localStorage.getItem("token")})})
+      
+      //If user is an admin, set adminstatus to true
+      if ((await response).status === 200) {
+        setIsAdmin(true);
+      }
+      //Else user is not an admin, set adminstatus to false
+      else {
+        setIsAdmin(false);
+      }
+    }
+    
+    //Initial function call to adminStatus
+    adminStatus();
+}, []);
 
 const navbarTitle = {
   color: "white",
-  fontFamily: "Gluten",
+  fontFamily: "Inter",
   fontSize: "25px"
-  
 }
-
-const dropdown = {
-  backgroundColor: "#2613fe"
-};
 
 const dropdownItem = {
   color: "white",
-  backgroundColor: "#2613fe",
-  fontFamily: "Gluten"
- 
+  backgroundColor: "#2C74B3",
+  fontFamily: "Inter"
 };
 
 const navLink = {
   color: "white",
-  fontFamily: "Gluten",
+  fontFamily: "Inter",
   fontSize: "18px",  
   flexDirection: "column"
-  
 };
 
 const linkContainer = {
   flexDirection: "column",
   justifyContent: "center",
   display: "flex",
-  alignItems: "center"
+  alignItems: "center",
+  color: "white"
 };
 
 const navbarStyle = {
-  backgroundColor: '#2613fe',
-  height: "80px"
+  backgroundImage: "linear-gradient(#0A2647, #2C74B3)",
+  height: "80px",
+  paddingBottom: "20px"
 };
 
   return (
-    <Navbar style={navbarStyle} expand="lg">
+    <Navbar style={navbarStyle} expand="lg" >
       <Container>
-        <LinkContainer to="/welcome" style={navbarTitle}><Navbar.Brand style={navbarTitle}>Gator Security Fundamentals</Navbar.Brand></LinkContainer>
+        <LinkContainer to="/welcome" style={navbarTitle}>
+          <Navbar.Brand style={navbarTitle}>
+            Gator Security Fundamentals
+          </Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav class="navbar-nav ms-auto mb-2 mb-lg-0" style={{color:'white'}}>            
-            <LinkContainer to="/learn" style={navLink}><Nav.Link style={navLink} eventKey={1}> <div style={linkContainer}><div>Learn</div><img src='./bookIcon.png' alt=''/></div></Nav.Link></LinkContainer>                 
-            <LinkContainer to="/game" style={navLink}><Nav.Link style={navLink} eventKey={2} ><div style={linkContainer}><div>Game</div><img src='./gameIcon.png' alt=''/></div></Nav.Link></LinkContainer>
-            <NavDropdown style={dropdown} eventKey={3} title={<img src='./profileIcon.png' alt=''/>}>
-                <LinkContainer to="/myprofile" style={dropdownItem}><NavDropdown.Item style={dropdownItem} eventKey={3.1}>My Profile</NavDropdown.Item></LinkContainer>
-                <NavDropdown.Item style={dropdownItem} eventKey={3.2}>Logout</NavDropdown.Item>
+          <Nav className="navbar-nav ms-auto mb-2 mb-lg-0" style={{color:'white'}}>            
+            <LinkContainer to="/learn" style={navLink}>
+              <Nav.Link style={navLink} eventKey={1}> 
+                <div style={linkContainer}>
+                  Learn
+                  <img src='/bookIcon.png' alt=''/>
+                </div>
+              </Nav.Link>
+            </LinkContainer>                 
+            <LinkContainer to="/game" style={navLink}>
+              <Nav.Link style={navLink} eventKey={2}>
+                <div style={linkContainer}>
+                  Game
+                  <img src='/gameIcon.png' alt=''/>
+                </div>
+              </Nav.Link>
+            </LinkContainer>
+            <NavDropdown title={<img src='/profileIcon.png' alt=''/>}  menuVariant="#2C74B3">
+              <LinkContainer to="/myprofile" style={dropdownItem}>
+                <NavDropdown.Item style={dropdownItem}>
+                  My Profile
+                </NavDropdown.Item>
+              </LinkContainer>
+              { isAdmin && 
+              <><LinkContainer to="/admin" style={dropdownItem}>
+                  <NavDropdown.Item style={dropdownItem} eventKey={3.2}>
+                    Admin Panel
+                  </NavDropdown.Item>
+                </LinkContainer><LinkContainer to="/modify_questions" style={dropdownItem}>
+                    <NavDropdown.Item style={dropdownItem} eventKey={3.3}>
+                      Question Editor
+                    </NavDropdown.Item>
+                  </LinkContainer></>
+              }
+              <LinkContainer to="/log-out" style={dropdownItem}>
+                <NavDropdown.Item style={dropdownItem} eventKey={3.4}>
+                  Logout
+                </NavDropdown.Item> 
+              </LinkContainer>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

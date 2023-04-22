@@ -1,0 +1,18 @@
+.card-container.game {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.card.game {
+    margin: 40px;
+    width: 550px !important;
+}
+
+.img-size {
+    float: left !important;
+    width: auto;
+    height: 405px !important;
+    object-fit: cover !important;
+}
